@@ -1,0 +1,52 @@
+.create-room-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.create-room-card {
+  background: white;
+  border-radius: var(--border-radius);
+  padding: 40px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  width: 100%;
+}
+
+.create-room-card h2 {
+  margin-bottom: 24px;
+  color: var(--text-dark);
+  text-align: center;
+}
+
+.checkbox-group label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.checkbox-group input[type="checkbox"] {
+  margin-right: 8px;
+  width: auto;
+}
+
+.info-box {
+  background-color: #F0F3FF;
+  border-left: 4px solid var(--primary-color);
+  padding: 16px;
+  border-radius: 4px;
+}
+
+.info-box p {
+  margin: 0;
+  color: #636E72;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .create-room-card {
+    padding: 24px;
+  }
+}
