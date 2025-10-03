@@ -2,6 +2,12 @@
 
 A web-based multiplayer party game inspired by Bad People (dycegames.com). Play hilarious and edgy voting rounds with friends or strangers online!
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Node.js Version](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen)](https://nodejs.org/)
+[![React Version](https://img.shields.io/badge/react-18.2.0-blue)](https://reactjs.org/)
+
+[Features](#features) • [Quick Start](#quick-start) • [Documentation](#documentation) • [Demo](#demo) • [Contributing](#contributing)
+
 ## Features
 
 - 🎮 **Online Multiplayer Rooms**: Create or join rooms with friends or strangers
@@ -59,7 +65,15 @@ A web-based multiplayer party game inspired by Bad People (dycegames.com). Play 
 
 ## Quick Start
 
-### Prerequisites
+### One-Command Setup (macOS/Linux)
+
+```bash
+./quickstart.sh
+```
+
+### Manual Setup
+
+**Prerequisites**
 - Node.js 18+ 
 - MongoDB (local or cloud instance)
 - npm or yarn
@@ -137,35 +151,73 @@ BadPeopleOnline/
 └── package.json          # Root package.json
 ```
 
-## API Documentation
+## API Overview
 
 ### REST API Endpoints
 
-- `POST /api/auth/register` - Register new user
-- `POST /api/auth/login` - Login user
-- `GET /api/rooms` - List public rooms
-- `POST /api/rooms` - Create new room
-- `GET /api/rooms/:id` - Get room details
-- `GET /api/questions` - Get question packs
-- `POST /api/reports` - Submit report
+| Endpoint | Method | Description | Auth |
+|----------|--------|-------------|------|
+| `/api/auth/register` | POST | Register new user | No |
+| `/api/auth/login` | POST | Login user | No |
+| `/api/auth/guest` | POST | Guest login | No |
+| `/api/rooms` | GET | List public rooms | Optional |
+| `/api/rooms` | POST | Create new room | Yes |
+| `/api/rooms/:code` | GET | Get room details | Optional |
+| `/api/questions` | GET | List question packs | Optional |
+| `/api/questions/:id` | GET | Get question pack | Optional |
+| `/api/reports` | POST | Submit report | Yes |
+
+[Full API Documentation →](docs/API.md)
 
 ### WebSocket Events
 
-#### Client → Server
+**Client → Server:**
 - `join-room` - Join a game room
-- `leave-room` - Leave current room
-- `submit-vote` - Submit vote for current question
+- `leave-room` - Leave current room  
 - `start-game` - Start the game (host only)
+- `submit-vote` - Submit vote for current question
 - `next-round` - Move to next round (host only)
 
-#### Server → Client
-- `room-update` - Room state changed
+**Server → Client:**
+- `room-joined` - Successfully joined room
 - `player-joined` - New player joined
 - `player-left` - Player left room
-- `question-start` - New question started
-- `voting-complete` - All votes submitted
-- `round-results` - Round results
+- `game-started` - Game has started
+- `next-question` - New question started
+- `vote-update` - Vote count updated
+- `round-results` - Round completed
 - `game-over` - Game ended
+- `error` - Error occurred
+
+[Detailed Event Documentation →](docs/API.md#websocket-events)
+
+## Documentation
+
+📚 **Comprehensive Guides Available:**
+
+- [**Getting Started**](docs/GETTING_STARTED.md) - Step-by-step setup guide
+- [**Architecture**](docs/ARCHITECTURE.md) - System design and technical details
+- [**API Reference**](docs/API.md) - Complete API documentation
+- [**Game Flow**](docs/GAME_FLOW.md) - Visual game flow diagrams
+- [**Deployment**](docs/DEPLOYMENT.md) - Production deployment guide
+- [**Monetization**](docs/MONETIZATION.md) - Revenue strategy and pricing
+- [**Moderation**](docs/MODERATION.md) - Moderation system details
+- [**Contributing**](CONTRIBUTING.md) - How to contribute
+
+## Demo
+
+🎮 **Try it yourself:**
+
+1. Clone the repo
+2. Run `./quickstart.sh` (or follow manual setup)
+3. Visit http://localhost:5173
+4. Create a room or join as a guest
+
+**Sample Credentials:**
+- Use "Play as Guest" for instant access
+- Or create a free account
+
+## Project Structure
 
 ## Moderation System
 
@@ -219,28 +271,87 @@ docker-compose up -d
 
 ## Contributing
 
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push to the branch
-5. Create a Pull Request
+We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
-## License
+### Development
 
-MIT License - see LICENSE file for details
+```bash
+# Fork the repository
+git clone https://github.com/YOUR_USERNAME/BadPeopleOnline.git
 
-## Support
+# Create a feature branch
+git checkout -b feature/amazing-feature
 
-For issues and questions:
-- GitHub Issues: [Report a bug](https://github.com/k2pitel/BadPeopleOnline/issues)
-- Email: support@badpeopleonline.com
+# Make your changes and commit
+git commit -m "Add amazing feature"
+
+# Push to your fork
+git push origin feature/amazing-feature
+
+# Open a Pull Request
+```
+
+### Areas for Contribution
+
+- 🐛 Bug fixes
+- ✨ New features
+- 📝 Documentation improvements
+- 🎨 UI/UX enhancements
+- 🧪 Adding tests
+- 🌍 Internationalization
 
 ## Roadmap
 
+### Current (v1.0 - MVP)
+- [x] Core gameplay mechanics
+- [x] Real-time multiplayer
+- [x] User authentication
+- [x] Question packs system
+- [x] Moderation framework
+- [x] Mobile-responsive UI
+
+### Upcoming (v1.1)
+- [ ] Admin dashboard
+- [ ] Advanced analytics
+- [ ] Custom avatars
+- [ ] In-game chat
+- [ ] Sound effects
+
+### Future (v2.0)
 - [ ] Mobile apps (iOS/Android)
 - [ ] Voice chat integration
-- [ ] Custom avatars
 - [ ] Tournament mode
-- [ ] Streaming integration (Twitch/YouTube)
-- [ ] Multiple language support
-- [ ] Advanced statistics and analytics
+- [ ] Streaming integration
+- [ ] Multiple languages
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- Inspired by [Bad People](https://dycegames.com/) by DYCE Games
+- Built with modern web technologies
+- Community feedback and contributions
+
+## Support
+
+- 📧 Email: support@badpeopleonline.com
+- 🐛 [Report a Bug](https://github.com/k2pitel/BadPeopleOnline/issues)
+- 💡 [Request a Feature](https://github.com/k2pitel/BadPeopleOnline/issues)
+- 📖 [Documentation](docs/)
+
+## Statistics
+
+- **Code Files:** 33 (JS/JSX/CSS)
+- **Documentation:** 10 comprehensive guides
+- **Database Models:** 4 MongoDB schemas
+- **UI Pages:** 6 React components
+- **API Endpoints:** 12+ routes
+- **WebSocket Events:** 10+ real-time events
+
+---
+
+Made with ❤️ by the BadPeopleOnline team
+
+**Star ⭐ this repo if you like it!**
